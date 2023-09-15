@@ -32,11 +32,16 @@ heart.addEventListener("click", () => {
   likeCount++;
   if (likeCount < 2) {
     const span = document.createElement("span");
-    span.textContent = `${likeCount}`;
+    span.textContent = likeCount;
     const li = document.createElement("li");
-    li.textContent = `${count} has been liked ${span} time`;
+    li.setAttribute("id", `like-${count}`);
+    li.append(`${count} has been liked `, span, " time");
     likes.appendChild(li);
   } else {
-    // update span
+    document.querySelector(`#like-${count} > span`).textContent = likeCount;
+    const item = document.querySelector(`#like-${count}`);
+    if (!item.textContent.endsWith("s")) {
+      document.querySelector(`#like-${count}`).append("s");
+    }
   }
 });
